@@ -1,0 +1,83 @@
+{
+    "model_name": "Random Forest Classifier",
+    "parameters": {
+        "n_estimators": 100,
+        "max_depth": 8,
+        "random_state": 42
+    },
+    "training_time_seconds": 1.37,
+    "accuracy": 74.09,
+    "roc_auc": 0.8085,
+    "precision": 0.7756,
+    "recall": 0.6703,
+    "f1_score": 0.7191,
+    "confusion_matrix": [
+        [
+            5625,
+            1319
+        ],
+        [
+            2243,
+            4560
+        ]
+    ],
+    "feature_names": [
+        "gender",
+        "height",
+        "weight",
+        "ap_hi",
+        "ap_lo",
+        "cholesterol",
+        "gluc",
+        "smoke",
+        "alco",
+        "active",
+        "age_years",
+        "bmi",
+        "pulse_pressure"
+    ],
+    "feature_importances": {
+        "ap_hi": 0.3806,
+        "ap_lo": 0.1926,
+        "pulse_pressure": 0.1417,
+        "age_years": 0.1053,
+        "cholesterol": 0.0866,
+        "bmi": 0.0324,
+        "weight": 0.0292,
+        "height": 0.0104,
+        "gluc": 0.0097,
+        "active": 0.005,
+        "smoke": 0.0027,
+        "alco": 0.002,
+        "gender": 0.0018
+    },
+    "test_size": 13747,
+    "train_size": 54984,
+    "benchmark_comparison": [
+        {
+            "model": "Random Forest",
+            "accuracy": 74.09,
+            "status": "Best Model \ud83c\udfc6"
+        },
+        {
+            "model": "Decision Tree",
+            "accuracy": 73.77,
+            "status": "Runner Up"
+        },
+        {
+            "model": "Logistic Regression",
+            "accuracy": 73.37,
+            "status": "Baseline"
+        },
+        {
+            "model": "SVM (LinearSVC)",
+            "accuracy": 73.24,
+            "status": "Baseline"
+        },
+        {
+            "model": "KNN (k=11)",
+            "accuracy": 72.4,
+            "status": "Baseline"
+        }
+    ]
+}
