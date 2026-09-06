@@ -6,7 +6,7 @@
   <title>CardioGuard AI - 12-Slide Clinical Case Study Presentation</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet">
   <style>
     :root {
       --bg-gradient: radial-gradient(circle at 10% 20%, #0f172a 0%, #020617 100%);
@@ -66,6 +66,7 @@
     .brand span {
       background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
       -webkit-background-clip: text;
+      background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
@@ -197,6 +198,7 @@
       margin-bottom: 1rem;
       background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
       -webkit-background-clip: text;
+      background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
@@ -354,6 +356,125 @@
       color: #fff;
     }
 
+    /* Helper utility classes replacing inline styles */
+    .mt-8 { margin-top: 2rem; }
+    .mt-6 { margin-top: 1.5rem; }
+    .mt-4 { margin-top: 1rem; }
+    .mb-8 { margin-bottom: 2rem; }
+    .mb-6 { margin-bottom: 1.5rem; }
+    .mb-5 { margin-bottom: 1.25rem; }
+    .mb-4 { margin-bottom: 1rem; }
+    .mb-2 { margin-bottom: 0.5rem; }
+    .mb-1 { margin-bottom: 0.25rem; }
+
+    .author-name {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 0.25rem;
+    }
+
+    .text-highlight {
+      color: #ffffff;
+      font-weight: 500;
+    }
+
+    .link-primary {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    .link-primary:hover {
+      text-decoration: underline;
+    }
+
+    .champion-card {
+      border-color: rgba(56, 189, 248, 0.4);
+      background: rgba(56, 189, 248, 0.05);
+      padding: 2rem;
+    }
+
+    .champion-title {
+      font-size: 1.1rem;
+    }
+
+    .champion-metrics {
+      display: flex;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .metric-primary { color: #38bdf8; }
+    .metric-success { color: #10b981; }
+    .metric-warning { color: #f59e0b; }
+    .metric-danger { color: #f43f5e; }
+
+    .metric-md {
+      font-size: 1.5rem;
+    }
+
+    .subtext-muted {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .problem-quote {
+      background: rgba(15, 23, 42, 0.7);
+      border-left: 4px solid var(--primary);
+      padding: 1.5rem;
+      border-radius: 8px;
+      margin-bottom: 2rem;
+    }
+
+    .problem-quote-text {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: #ffffff;
+      line-height: 1.6;
+    }
+
+    .img-mh-280 {
+      max-height: 280px;
+    }
+
+    .border-l-primary {
+      border-left: 4px solid var(--primary);
+    }
+
+    .border-l-accent {
+      border-left: 4px solid var(--accent);
+    }
+
+    .text-accent {
+      color: var(--accent);
+    }
+
+    .text-white-relaxed {
+      line-height: 1.6;
+      color: #ffffff;
+    }
+
+    .conclusion-card {
+      padding: 2rem;
+      border-color: rgba(56, 189, 248, 0.3);
+      background: rgba(15, 23, 42, 0.8);
+      margin-bottom: 2rem;
+    }
+
+    .conclusion-text {
+      font-size: 1.15rem;
+      line-height: 1.8;
+      color: #ffffff;
+    }
+
+    .footer-author {
+      margin-top: 2rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
     /* Footer Keybindings indicator */
     footer {
       padding: 1rem 2rem;
@@ -430,10 +551,10 @@
       <span>🫀 CardioGuard AI</span> | Case Study
     </a>
     <div class="nav-controls">
-      <button class="btn" id="prevBtn" onclick="changeSlide(-1)">◀ Prev</button>
+      <button type="button" class="btn" id="prevBtn" onclick="changeSlide(-1)">◀ Prev</button>
       <span class="slide-counter" id="slideCounter">Slide 1 of 12</span>
-      <button class="btn" id="nextBtn" onclick="changeSlide(1)">Next ▶</button>
-      <button class="btn btn-primary" onclick="window.print()">🖨️ Export PDF</button>
+      <button type="button" class="btn" id="nextBtn" onclick="changeSlide(1)">Next ▶</button>
+      <button type="button" class="btn btn-primary" onclick="window.print()">🖨️ Export PDF</button>
     </div>
   </header>
 
@@ -448,49 +569,49 @@
 
       <!-- SLIDE 1: Title -->
       <div class="slide active" id="slide-1">
-        <div class="slide-badge">Slide 01 • Title & Overview</div>
+        <div class="slide-badge">Slide 01 • Title &amp; Overview</div>
         <h1 class="slide-title">Early Cardiovascular Disease Risk Prediction</h1>
         <h2 class="slide-subtitle">Clinical Risk Stratification via Supervised Machine Learning</h2>
 
-        <div class="grid-2" style="margin-top: 2rem;">
+        <div class="grid-2 mt-8">
           <div>
-            <div class="card" style="margin-bottom: 1.25rem;">
-              <div class="card-title">👨‍💻 Lead Researcher & Analyst</div>
-              <div style="font-size: 1.2rem; font-weight: 700; color: #fff; margin-bottom: 0.25rem;">Ravi Pandey</div>
-              <div class="card-desc">Machine Learning Engineer & Clinical Data Analyst</div>
+            <div class="card mb-5">
+              <div class="card-title">👨‍💻 Lead Researcher &amp; Analyst</div>
+              <div class="author-name">Ravi Pandey</div>
+              <div class="card-desc">Machine Learning Engineer &amp; Clinical Data Analyst</div>
             </div>
-            <div class="card" style="margin-bottom: 1.25rem;">
+            <div class="card mb-5">
               <div class="card-title">🛠️ Analytical Toolstack</div>
-              <div class="card-desc" style="color: #fff; font-weight: 500;">
+              <div class="card-desc text-highlight">
                 Python 3.10 • Scikit-Learn • Pandas • NumPy • Matplotlib • Seaborn • Streamlit
               </div>
             </div>
             <div class="card">
-              <div class="card-title">🔗 Project Assets & Repositories</div>
+              <div class="card-title">🔗 Project Assets &amp; Repositories</div>
               <div class="card-desc">
-                GitHub: <a href="https://github.com/ravi8800pandey-ai/cardioguard-ai" target="_blank" style="color: var(--primary); text-decoration: none;">ravi8800pandey-ai/cardioguard-ai</a><br>
+                GitHub: <a href="https://github.com/ravi8800pandey-ai/cardioguard-ai" target="_blank" class="link-primary">ravi8800pandey-ai/cardioguard-ai</a><br>
                 Date: September 2026 • Production Web App Included
               </div>
             </div>
           </div>
           <div>
-            <div class="card" style="border-color: rgba(56, 189, 248, 0.4); background: rgba(56, 189, 248, 0.05); padding: 2rem;">
-              <div class="card-title" style="font-size: 1.1rem;">🏆 Champion Model Performance</div>
-              <div style="display: flex; gap: 1.5rem; margin-top: 1.5rem;">
+            <div class="card champion-card">
+              <div class="card-title champion-title">🏆 Champion Model Performance</div>
+              <div class="champion-metrics">
                 <div>
-                  <div class="card-metric" style="color: #38bdf8;">74.09%</div>
+                  <div class="card-metric metric-primary">74.09%</div>
                   <div class="card-desc">Diagnostic Accuracy</div>
                 </div>
                 <div>
-                  <div class="card-metric" style="color: #10b981;">0.8085</div>
+                  <div class="card-metric metric-success">0.8085</div>
                   <div class="card-desc">ROC-AUC Score</div>
                 </div>
                 <div>
-                  <div class="card-metric" style="color: #f59e0b;">77.56%</div>
+                  <div class="card-metric metric-warning">77.56%</div>
                   <div class="card-desc">Precision</div>
                 </div>
               </div>
-              <div style="margin-top: 1.5rem; font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">
+              <div class="subtext-muted mt-6">
                 Trained and cross-validated on 70,000 patient records from Kaggle CVD cohort with full physiological bounding and clinical feature engineering.
               </div>
             </div>
@@ -504,8 +625,8 @@
         <h1 class="slide-title">The Clinical Screening Challenge</h1>
         <h2 class="slide-subtitle">Formulating an Automated, Non-Invasive Risk Stratification Pipeline</h2>
 
-        <div style="background: rgba(15, 23, 42, 0.7); border-left: 4px solid var(--primary); padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem;">
-          <p style="font-size: 1.15rem; font-weight: 600; color: #fff; line-height: 1.6;">
+        <div class="problem-quote">
+          <p class="problem-quote-text">
             "Can routine, non-invasive patient examination metrics—such as age, blood pressure, BMI, cholesterol, and blood glucose—accurately identify individuals at elevated risk of cardiovascular disease prior to acute cardiac events?"
           </p>
         </div>
@@ -513,17 +634,17 @@
         <div class="grid-3">
           <div class="card">
             <div class="card-title">🌍 Global Health Burden</div>
-            <div class="card-metric" style="font-size: 1.5rem; color: #f43f5e;">17.9M / yr</div>
+            <div class="card-metric metric-md metric-danger">17.9M / yr</div>
             <div class="card-desc">CVD remains the #1 cause of mortality worldwide. 4 out of 5 deaths occur due to preventable heart attacks and strokes.</div>
           </div>
           <div class="card">
             <div class="card-title">⏱️ Silent Asymptomatic Onset</div>
-            <div class="card-metric" style="font-size: 1.5rem; color: #f59e0b;">Asymptomatic</div>
+            <div class="card-metric metric-md metric-warning">Asymptomatic</div>
             <div class="card-desc">Arterial hypertension and vascular remodeling develop silently over years before overt clinical presentation.</div>
           </div>
           <div class="card">
             <div class="card-title">🎯 Primary Care Triage</div>
-            <div class="card-metric" style="font-size: 1.5rem; color: #10b981;">Decision Support</div>
+            <div class="card-metric metric-md metric-success">Decision Support</div>
             <div class="card-desc">Enable high-throughput automated pre-screening during standard outpatient visits to prioritize secondary testing.</div>
           </div>
         </div>
@@ -532,10 +653,10 @@
       <!-- SLIDE 3: Dataset Architecture -->
       <div class="slide" id="slide-3">
         <div class="slide-badge">Slide 03 • Cohort Architecture</div>
-        <h1 class="slide-title">Dataset Anatomy & Clinical Features</h1>
+        <h1 class="slide-title">Dataset Anatomy &amp; Clinical Features</h1>
         <h2 class="slide-subtitle">Kaggle Cardiovascular Disease Cohort: 70,000 Examination Records</h2>
 
-        <div class="grid-4" style="margin-bottom: 1.5rem;">
+        <div class="grid-4 mb-6">
           <div class="card">
             <div class="card-title">Total Records</div>
             <div class="card-metric">70,000</div>
@@ -543,7 +664,7 @@
           </div>
           <div class="card">
             <div class="card-title">Target Balance</div>
-            <div class="card-metric" style="color: #10b981;">50.0% / 50.0%</div>
+            <div class="card-metric metric-success">50.0% / 50.0%</div>
             <div class="card-desc">Exact balance (35,021 healthy / 34,979 CVD)</div>
           </div>
         </div>
@@ -572,25 +693,25 @@
             </tr>
             <tr>
               <td><code>height</code>, <code>weight</code></td>
-              <td>Stature & Body Mass</td>
+              <td>Stature &amp; Body Mass</td>
               <td>Examination</td>
               <td>Centimeters (cm), Kilograms (kg)</td>
             </tr>
             <tr>
               <td><code>ap_hi</code>, <code>ap_lo</code></td>
-              <td>Systolic & Diastolic BP</td>
+              <td>Systolic &amp; Diastolic BP</td>
               <td>Examination</td>
               <td>mmHg (Millimeters of Mercury)</td>
             </tr>
             <tr>
               <td><code>cholesterol</code>, <code>gluc</code></td>
-              <td>Serum Lipids & Fasting Glucose</td>
+              <td>Serum Lipids &amp; Fasting Glucose</td>
               <td>Examination</td>
               <td>1: Normal | 2: Above Normal | 3: Well Above Normal</td>
             </tr>
             <tr>
               <td><code>smoke</code>, <code>alco</code>, <code>active</code></td>
-              <td>Behavioral & Lifestyle Risk</td>
+              <td>Behavioral &amp; Lifestyle Risk</td>
               <td>Subjective</td>
               <td>Binary flags (0: No, 1: Yes)</td>
             </tr>
@@ -607,7 +728,7 @@
       <!-- SLIDE 4: Data Preparation -->
       <div class="slide" id="slide-4">
         <div class="slide-badge">Slide 04 • Pipeline Engineering</div>
-        <h1 class="slide-title">Data Preparation & Feature Engineering</h1>
+        <h1 class="slide-title">Data Preparation &amp; Feature Engineering</h1>
         <h2 class="slide-subtitle">Rigorous Preprocessing and Hemodynamic Derivations</h2>
 
         <div class="grid-2">
@@ -637,7 +758,7 @@
           </div>
           <div>
             <div class="slide-img-container">
-              <img src="images/01_target_distribution.png" alt="Target Balance" class="slide-img" style="max-height: 280px;">
+              <img src="images/01_target_distribution.png" alt="Target Balance" class="slide-img img-mh-280">
               <div class="img-caption">Target Class Distribution (Cleaned Cohort: 68,731 Records)</div>
             </div>
           </div>
@@ -654,7 +775,7 @@
           <div class="slide-img-container">
             <img src="images/02_age_distribution.png" alt="Age Distribution" class="slide-img">
             <div class="img-caption">
-              <strong>Age Gradient:</strong> CVD prevalence more than doubles with age, rising from <strong>29.26% (<45 yrs)</strong> to <strong>66.80% (60–64 yrs)</strong>.
+              <strong>Age Gradient:</strong> CVD prevalence more than doubles with age, rising from <strong>29.26% (&lt;45 yrs)</strong> to <strong>66.80% (60–64 yrs)</strong>.
             </div>
           </div>
           <div class="slide-img-container">
@@ -681,7 +802,7 @@
       <!-- SLIDE 6: Important Features -->
       <div class="slide" id="slide-6">
         <div class="slide-badge">Slide 06 • Explainability</div>
-        <h1 class="slide-title">Important Predictors & Model Weights</h1>
+        <h1 class="slide-title">Important Predictors &amp; Model Weights</h1>
         <h2 class="slide-subtitle">Quantifying Biological Determinants via Random Forest Feature Importances</h2>
 
         <div class="grid-2">
@@ -738,8 +859,8 @@
                 </tr>
               </tbody>
             </table>
-            <div class="card" style="margin-top: 1rem; border-left: 4px solid var(--primary);">
-              <div class="card-desc" style="color: #fff;">
+            <div class="card mt-4 border-l-primary">
+              <div class="card-desc text-white-relaxed">
                 <strong>Hemodynamic Primacy:</strong> Systolic BP, Diastolic BP, and engineered Pulse Pressure account for <strong>71.49%</strong> of total predictive power, confirming vascular wall stress as the dominant signal.
               </div>
             </div>
@@ -750,7 +871,7 @@
       <!-- SLIDE 7: Model Comparison -->
       <div class="slide" id="slide-7">
         <div class="slide-badge">Slide 07 • Benchmark Analysis</div>
-        <h1 class="slide-title">Model Comparison & Benchmark Leaderboard</h1>
+        <h1 class="slide-title">Model Comparison &amp; Benchmark Leaderboard</h1>
         <h2 class="slide-subtitle">Multi-Algorithm Evaluation on Independent Holdout Test Cohort (N = 13,747)</h2>
 
         <div class="grid-2">
@@ -809,7 +930,7 @@
                 </tr>
               </tbody>
             </table>
-            <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 1rem; line-height: 1.5;">
+            <div class="subtext-muted mt-4">
               &bull; Random Forest achieves the superior diagnostic accuracy and highest ROC-AUC (0.8085).<br>
               &bull; Decision Tree provides competitive sensitivity (70.90%) with shallow depth explainability.
             </div>
@@ -826,7 +947,7 @@
       <!-- SLIDE 8: Confusion Matrix -->
       <div class="slide" id="slide-8">
         <div class="slide-badge">Slide 08 • Clinical Evaluation</div>
-        <h1 class="slide-title">Confusion Matrix & Triage Diagnostics</h1>
+        <h1 class="slide-title">Confusion Matrix &amp; Triage Diagnostics</h1>
         <h2 class="slide-subtitle">Decomposing Classification Outcomes for Patient Safety (N = 13,747 Patients)</h2>
 
         <div class="grid-2">
@@ -837,18 +958,18 @@
             </div>
           </div>
           <div>
-            <div class="card" style="margin-bottom: 1rem;">
+            <div class="card mb-4">
               <div class="card-title">🔍 Matrix Breakdown</div>
-              <div class="card-desc" style="line-height: 1.6; color: #fff;">
+              <div class="card-desc text-white-relaxed">
                 &bull; <strong>True Negatives (TN = 5,625 | 81.01%):</strong> Healthy individuals correctly identified.<br>
                 &bull; <strong>True Positives (TP = 4,560 | 67.03%):</strong> CVD patients flagged for early care.<br>
                 &bull; <strong>False Positives (FP = 1,319 | 18.99%):</strong> Healthy patients referred for secondary non-invasive tests.<br>
                 &bull; <strong>False Negatives (FN = 2,243 | 32.97%):</strong> CVD-positive patients missed during standard thresholding.
               </div>
             </div>
-            <div class="card" style="border-left: 4px solid var(--accent);">
-              <div class="card-title" style="color: var(--accent);">⚠️ Clinical Screening Imperative</div>
-              <div class="card-desc" style="line-height: 1.5;">
+            <div class="card border-l-accent">
+              <div class="card-title text-accent">⚠️ Clinical Screening Imperative</div>
+              <div class="card-desc subtext-muted">
                 In medical screening, <strong>False Negatives carry severe clinical cost</strong> (delayed intervention leads to infarcts). Calibrating the probability decision threshold from 0.50 down to <strong>0.38</strong> raises clinical recall above <strong>85%</strong> for high-sensitivity preventative triage.
               </div>
             </div>
@@ -859,7 +980,7 @@
       <!-- SLIDE 9: Main Findings -->
       <div class="slide" id="slide-9">
         <div class="slide-badge">Slide 09 • Empirical Synthesis</div>
-        <h1 class="slide-title">Core Clinical Findings & Evidence</h1>
+        <h1 class="slide-title">Core Clinical Findings &amp; Evidence</h1>
         <h2 class="slide-subtitle">Four Grounded Discoveries Derived Directly from 70,000 Patient Records</h2>
 
         <ul class="finding-list">
@@ -876,7 +997,7 @@
             Observed disease prevalence escalates monotonically from <strong>29.26% in patients under 45</strong> to <strong>66.80% in patients aged 60–64</strong>, establishing age 50 as a vital threshold for mandatory routine screening.
           </li>
           <li>
-            <strong>4. Metabolic & Adiposity Compound Risk Multiplier:</strong><br>
+            <strong>4. Metabolic &amp; Adiposity Compound Risk Multiplier:</strong><br>
             Hypercholesterolemia drives disease probability from <strong>43.56% (Normal)</strong> to <strong>76.29% (Well Above Normal)</strong>. When compounded with clinical obesity (BMI &ge; 30 kg/m&sup2;), cohort prevalence exceeds <strong>82%</strong>.
           </li>
         </ul>
@@ -888,7 +1009,7 @@
         <h1 class="slide-title">Actionable Clinical Translation</h1>
         <h2 class="slide-subtitle">Integrating Automated Risk Stratification Responsibly into Clinical Workflows</h2>
 
-        <div class="grid-3" style="margin-bottom: 1.5rem;">
+        <div class="grid-3 mb-6">
           <div class="card">
             <div class="card-title">1. Outpatient Screening Triage</div>
             <div class="card-desc">Deploy the algorithm as a pre-consultation decision aid to flag asymptomatic high-risk patients during routine annual examinations.</div>
@@ -905,7 +1026,7 @@
 
         <div class="grid-2">
           <div class="card">
-            <div class="card-title">4. Subgroup Fairness & Demographic Audits</div>
+            <div class="card-title">4. Subgroup Fairness &amp; Demographic Audits</div>
             <div class="card-desc">Routinely monitor sensitivity across biological sex and age brackets to ensure uniform screening parity and avoid systematic false negative disparities.</div>
           </div>
           <div class="card">
@@ -917,8 +1038,8 @@
 
       <!-- SLIDE 11: Limitations -->
       <div class="slide" id="slide-11">
-        <div class="slide-badge">Slide 11 • Safety & Ethics</div>
-        <h1 class="slide-title">Study Limitations & Boundaries</h1>
+        <div class="slide-badge">Slide 11 • Safety &amp; Ethics</div>
+        <h1 class="slide-title">Study Limitations &amp; Boundaries</h1>
         <h2 class="slide-subtitle">Contextualizing Findings for Safe Clinical Translation</h2>
 
         <div class="grid-2">
@@ -956,11 +1077,11 @@
       <!-- SLIDE 12: Conclusion -->
       <div class="slide" id="slide-12">
         <div class="slide-badge">Slide 12 • Final Conclusion</div>
-        <h1 class="slide-title">Conclusion & Project Synthesis</h1>
+        <h1 class="slide-title">Conclusion &amp; Project Synthesis</h1>
         <h2 class="slide-subtitle">Summary of Achievements, Deployment, and Future Directions</h2>
 
-        <div class="card" style="padding: 2rem; border-color: rgba(56, 189, 248, 0.3); background: rgba(15, 23, 42, 0.8); margin-bottom: 2rem;">
-          <p style="font-size: 1.15rem; line-height: 1.8; color: #fff;">
+        <div class="card conclusion-card">
+          <p class="conclusion-text">
             This project demonstrated an end-to-end machine-learning workflow for cardiovascular-risk prediction across 70,000 patient records. The analysis identified critical hemodynamic patterns—revealing blood pressure and pulse pressure as primary predictors—and compared five classification models, establishing Random Forest as the champion architecture (<strong>74.09% accuracy, 0.8085 ROC-AUC</strong>). The result is an educational prototype and clinical decision-support platform that requires further prospective validation before real-world diagnostic deployment.
           </p>
         </div>
@@ -980,8 +1101,8 @@
           </div>
         </div>
 
-        <div style="margin-top: 2rem; text-align: center; color: var(--text-muted); font-size: 0.9rem;">
-          Developed by <strong>Ravi Pandey</strong> &bull; September 2026 &bull; <a href="https://github.com/ravi8800pandey-ai/cardioguard-ai" target="_blank" style="color: var(--primary); text-decoration: none;">GitHub: cardioguard-ai</a>
+        <div class="footer-author">
+          Developed by <strong>Ravi Pandey</strong> &bull; September 2026 &bull; <a href="https://github.com/ravi8800pandey-ai/cardioguard-ai" target="_blank" class="link-primary">GitHub: cardioguard-ai</a>
         </div>
       </div>
 
