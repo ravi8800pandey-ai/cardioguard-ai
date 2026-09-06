@@ -4,6 +4,7 @@
 > **Format:** 12-Slide Executive Presentation  
 > **Audience:** Clinical Stakeholders, Technical Recruiters, Healthcare Data Science Teams  
 > **Repository:** [CardioGuard AI GitHub Repository](https://github.com/ravi8800pandey-ai/cardioguard-ai)  
+> **Live Web Application:** [https://cardioguard-ai-fddqjjqlecngokyx2uvpj9.streamlit.app/](https://cardioguard-ai-fddqjjqlecngokyx2uvpj9.streamlit.app/)  
 > **Interactive Slide Deck:** [Open Presentation Deck (HTML / Print to PDF)](case_study_presentation.html)
 
 ---
@@ -21,6 +22,7 @@
 - **Core Technology Stack:** Python 3.10+, Scikit-Learn, Pandas, NumPy, Matplotlib, Seaborn, Streamlit
 - **Project Date:** September 2026
 - **GitHub Repository:** [https://github.com/ravi8800pandey-ai/cardioguard-ai](https://github.com/ravi8800pandey-ai/cardioguard-ai)
+- **Live Deployed App:** [https://cardioguard-ai-fddqjjqlecngokyx2uvpj9.streamlit.app/](https://cardioguard-ai-fddqjjqlecngokyx2uvpj9.streamlit.app/)
 - **Champion Model:** Random Forest Classifier (Accuracy: **74.09%**, ROC-AUC: **0.8085**, Sensitivity: **67.03%**)
 
 ---
@@ -268,7 +270,7 @@ This investigation demonstrated a rigorous, end-to-end clinical data science and
 ### Key Takeaways
 - Successfully engineered an interpretable Random Forest pipeline achieving **74.09% accuracy**, **77.56% precision**, and **0.8085 ROC-AUC**.
 - Established that routine non-invasive parameters—primarily blood pressure, pulse pressure, age, and cholesterol—contain substantial discriminatory power for early disease detection.
-- Developed an interactive clinical deployment interface ([CardioGuard AI Streamlit Application](https://github.com/ravi8800pandey-ai/cardioguard-ai)) offering real-time patient biometrics, SVG risk gauge visualization, and automated triage report generation.
+- Developed an interactive clinical deployment interface ([CardioGuard AI Live Streamlit Application](https://cardioguard-ai-fddqjjqlecngokyx2uvpj9.streamlit.app/)) offering real-time patient biometrics, SVG risk gauge visualization, and automated triage report generation.
 
 ### Closing Statement
 > **CardioGuard AI represents a validated educational and decision-support prototype. With subsequent prospective clinical validation and longitudinal data integration, routine biometric risk modeling holds substantial promise for scalable, early cardiovascular intervention.**

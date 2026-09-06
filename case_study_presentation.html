@@ -108,6 +108,20 @@
       box-shadow: 0 6px 20px rgba(2, 132, 199, 0.5);
     }
 
+    .btn-live {
+      background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+      border: none;
+      color: #ffffff;
+      text-decoration: none;
+      box-shadow: 0 4px 14px rgba(239, 68, 68, 0.3);
+    }
+
+    .btn-live:hover {
+      background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+      color: #ffffff;
+      transform: translateY(-1px);
+    }
+
     .slide-counter {
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.9rem;
@@ -551,6 +565,7 @@
       <span>🫀 CardioGuard AI</span> | Case Study
     </a>
     <div class="nav-controls">
+      <a href="https://cardioguard-ai-fddqjjqlecngokyx2uvpj9.streamlit.app/" target="_blank" class="btn btn-live">🚀 Live App</a>
       <button type="button" class="btn" id="prevBtn" onclick="changeSlide(-1)">◀ Prev</button>
       <span class="slide-counter" id="slideCounter">Slide 1 of 12</span>
       <button type="button" class="btn" id="nextBtn" onclick="changeSlide(1)">Next ▶</button>
@@ -589,6 +604,7 @@
             <div class="card">
               <div class="card-title">🔗 Project Assets &amp; Repositories</div>
               <div class="card-desc">
+                Live App: <a href="https://cardioguard-ai-fddqjjqlecngokyx2uvpj9.streamlit.app/" target="_blank" class="link-primary">cardioguard-ai.streamlit.app</a><br>
                 GitHub: <a href="https://github.com/ravi8800pandey-ai/cardioguard-ai" target="_blank" class="link-primary">ravi8800pandey-ai/cardioguard-ai</a><br>
                 Date: September 2026 • Production Web App Included
               </div>
@@ -1093,7 +1109,10 @@
           </div>
           <div class="card">
             <div class="card-title">🌐 Live Streamlit Web App</div>
-            <div class="card-desc">Interactive clinical UI with dynamic BMI badges, AHA blood pressure staging, and automated clinical report export.</div>
+            <div class="card-desc">
+              <a href="https://cardioguard-ai-fddqjjqlecngokyx2uvpj9.streamlit.app/" target="_blank" class="link-primary"><strong>Open Live Application &rarr;</strong></a><br>
+              Interactive clinical UI with dynamic BMI badges, AHA blood pressure staging, and automated clinical report export.
+            </div>
           </div>
           <div class="card">
             <div class="card-title">📄 Clinical Case Analysis</div>

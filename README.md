@@ -7,6 +7,10 @@
 [![ROC-AUC](https://img.shields.io/badge/ROC--AUC-0.8085-blue.svg)]()
 [![Dataset](https://img.shields.io/badge/Kaggle-CVD_70K_Records-20BEFF.svg?logo=kaggle&logoColor=white)](https://www.kaggle.com/datasets/sulianova/cardiovascular-disease-dataset)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Live Demo](https://img.shields.io/badge/Streamlit_Cloud-Live_App-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)](https://cardioguard-ai-fddqjjqlecngokyx2uvpj9.streamlit.app/)
+
+> 🚀 **Live Interactive Web Application:** [https://cardioguard-ai-fddqjjqlecngokyx2uvpj9.streamlit.app/](https://cardioguard-ai-fddqjjqlecngokyx2uvpj9.streamlit.app/)  
+> Test patient biometrics in real-time, view dynamic AHA blood pressure staging, evaluate continuous CVD risk probabilities via SVG gauge, and export automated clinical assessment reports online.
 
 **CardioGuard AI** is an end-to-end clinical machine learning and decision-support platform designed to stratify cardiovascular disease (CVD) risk using non-invasive routine examination biometrics. 
 
@@ -20,7 +24,7 @@ This repository is organized into two primary pillars:
 
 | Pillar | Description | Primary Deliverables |
 | :--- | :--- | :--- |
-| **1. Technical Project** | Complete end-to-end data science pipeline, cleaning, feature engineering, statistical tests, 5-model benchmarking, hyperparameter tuning, and production pipeline serialization. | • [Full Jupyter Notebook (`cardio_cvd_prediction.ipynb`)](cardio_cvd_prediction.ipynb)<br>• [Training Script (`train_model.py`)](train_model.py)<br>• [Production Web App (`app.py`)](app.py)<br>• [Extracted Chart Assets (`images/`)](images/) |
+| **1. Technical Project** | Complete end-to-end data science pipeline, cleaning, feature engineering, statistical tests, 5-model benchmarking, hyperparameter tuning, and production pipeline serialization. | • [Full Jupyter Notebook (`cardio_cvd_prediction.ipynb`)](cardio_cvd_prediction.ipynb)<br>• [Training Script (`train_model.py`)](train_model.py)<br>• [Production Web App (`app.py`)](app.py)<br>• **[🚀 Live Web App](https://cardioguard-ai-fddqjjqlecngokyx2uvpj9.streamlit.app/)**<br>• [Extracted Chart Assets (`images/`)](images/) |
 | **2. Case-Study Presentation** | Executive problem-to-solution story designed for clinical stakeholders and recruiters. Grounded in exact calculated metrics with zero code clutter. | • [12-Slide Case Analysis (`CASE_STUDY.md`)](CASE_STUDY.md)<br>• [Interactive Slide Deck (`case_study_presentation.html`)](case_study_presentation.html) *(Supports 1-click Print to PDF)* |
 
 ---
@@ -138,6 +142,8 @@ Together, **hemodynamic variables (systolic, diastolic, and pulse pressure) acco
 ---
 
 ## 🚀 CardioGuard AI Web Application Features
+
+> 🌐 **Access Live Deployment:** [https://cardioguard-ai-fddqjjqlecngokyx2uvpj9.streamlit.app/](https://cardioguard-ai-fddqjjqlecngokyx2uvpj9.streamlit.app/)
 
 The interactive clinical decision-support application is built with **Streamlit**:
 
