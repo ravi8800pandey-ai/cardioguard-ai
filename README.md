@@ -47,14 +47,14 @@ The model is trained on the Kaggle Cardiovascular Disease dataset containing **7
 
 | Variable | Clinical Feature | Type | Measurement / Categories |
 | :--- | :--- | :--- | :--- |
-| `age_years` | Chronological Age | Continuous | Derived from days ($39.0 - 64.9$ years) |
+| `age_years` | Chronological Age | Continuous | Derived from days (39.0 – 64.9 years) |
 | `gender` | Biological Sex | Categorical | 1: Female, 2: Male |
 | `height` | Stature | Continuous | Centimeters (cm) |
 | `weight` | Body Mass | Continuous | Kilograms (kg) |
 | `ap_hi` | Systolic Blood Pressure | Continuous | mmHg (Cardiac contraction peak) |
 | `ap_lo` | Diastolic Blood Pressure | Continuous | mmHg (Resting arterial pressure) |
-| `bmi` | Body Mass Index | Continuous | $\text{weight (kg)} / (\text{height (m)})^2$ |
-| `pulse_pressure` | Arterial Pulse Pressure | Continuous | $\text{ap\_hi} - \text{ap\_lo}$ (Vascular stiffness indicator) |
+| `bmi` | Body Mass Index | Continuous | `weight (kg) / (height (m))²` |
+| `pulse_pressure` | Arterial Pulse Pressure | Continuous | `ap_hi − ap_lo` (Vascular stiffness indicator) |
 | `cholesterol` | Serum Total Cholesterol | Ordinal | 1: Normal, 2: Above Normal, 3: Well Above Normal |
 | `gluc` | Fasting Glucose | Ordinal | 1: Normal, 2: Above Normal, 3: Well Above Normal |
 | `smoke` | Smoking Inhalation | Binary | 0: Non-smoker, 1: Active smoker |
@@ -65,9 +65,9 @@ The model is trained on the Kaggle Cardiovascular Disease dataset containing **7
 ### Data Preparation Steps
 1. **Age Conversion:** Converted raw days to fractional continuous years (`age / 365.0`).
 2. **Feature Engineering:** 
-   - WHO Body Mass Index ($\text{kg/m}^2$).
-   - Hemodynamic Pulse Pressure ($\text{ap\_hi} - \text{ap\_lo}$).
-3. **Physiological Filtering:** Filtered out physiological artifacts ($60 \le \text{ap\_hi} \le 250$, $40 \le \text{ap\_lo} \le 160$, $100 \le \text{height} \le 250$, $30 \le \text{weight} \le 200$), retaining **68,731 high-integrity records**.
+   - WHO Body Mass Index (`kg/m²`).
+   - Hemodynamic Pulse Pressure (`ap_hi − ap_lo`).
+3. **Physiological Filtering:** Filtered out physiological artifacts (`60 ≤ ap_hi ≤ 250`, `40 ≤ ap_lo ≤ 160`, `100 ≤ height ≤ 250`, `30 ≤ weight ≤ 200`), retaining **68,731 high-integrity records**.
 4. **Stratified Split:** Split into **54,984 training instances** (80%) and **13,747 test instances** (20%), scaled with `StandardScaler`.
 
 ---
@@ -88,15 +88,15 @@ The model is trained on the Kaggle Cardiovascular Disease dataset containing **7
 
 ## 🏆 Model Benchmarking & Evaluation
 
-Five distinct machine learning architectures were trained and evaluated on the identical holdout test cohort ($N = 13,747$):
+Five distinct machine learning architectures were trained and evaluated on the identical holdout test cohort (N = 13,747):
 
 | Classification Algorithm | Accuracy | Precision | Recall | F1-Score | ROC-AUC | Status |
 | :--- | :---: | :---: | :---: | :---: | :---: | :--- |
 | **Random Forest (Champion)** | **74.09%** | **77.56%** | **67.03%** | **71.91%** | **0.8085** | 🏆 **Best Overall Model** |
-| **Decision Tree ($d=6$)** | 73.77% | 74.79% | **70.90%** | **72.79%** | 0.8009 | 🥈 Runner-Up (High Recall) |
+| **Decision Tree (d = 6)** | 73.77% | 74.79% | **70.90%** | **72.79%** | 0.8009 | 🥈 Runner-Up (High Recall) |
 | **Logistic Regression** | 73.37% | 75.97% | 67.56% | 71.52% | 0.7995 | Linear Baseline |
 | **Linear SVM (LinearSVC)** | 73.24% | 76.27% | 66.66% | 71.14% | 0.7993 | Maximum Margin Baseline |
-| **K-Nearest Neighbors ($k=11$)** | 72.41% | 73.10% | 70.00% | 71.52% | 0.7823 | Non-Parametric Baseline |
+| **K-Nearest Neighbors (k = 11)** | 72.41% | 73.10% | 70.00% | 71.52% | 0.7823 | Non-Parametric Baseline |
 
 ![Model Benchmark Comparison](images/10_model_accuracy_comparison.png)
 
@@ -104,7 +104,7 @@ Five distinct machine learning architectures were trained and evaluated on the i
 
 ## 🎯 Confusion Matrix & Clinical Screening Analysis
 
-The champion **Random Forest** model was evaluated on $13,747$ unseen test patients:
+The champion **Random Forest** model was evaluated on 13,747 unseen test patients:
 
 ![Random Forest Confusion Matrix](images/12_rf_confusion_matrix.png)
 
@@ -112,7 +112,7 @@ The champion **Random Forest** model was evaluated on $13,747$ unseen test patie
 - **True Negatives (TN): 5,625** (Specificity: **81.01%**) — Healthy individuals correctly identified and spared unnecessary medical anxiety.
 - **True Positives (TP): 4,560** (Sensitivity / Recall: **67.03%**) — High-risk patients correctly flagged for early intervention.
 - **False Positives (FP): 1,319** (False Positive Rate: **18.99%**) — Healthy patients referred for low-cost secondary checkups (ECG, repeat BP).
-- **False Negatives (FN): 2,243** (False Negative Rate: **32.97%**) — Individuals with CVD missed by standard $0.50$ decision thresholding.
+- **False Negatives (FN): 2,243** (False Negative Rate: **32.97%**) — Individuals with CVD missed by standard 0.50 decision thresholding.
 
 > ### 💡 Clinical Triage Safety Rationale:
 > In health screening, **a False Negative is clinically far more hazardous than a False Positive**. In production settings, CardioGuard AI supports configurable decision threshold calibration: lowering the threshold to **0.38** elevates sensitivity beyond **85%**, ensuring minimal false negatives during initial primary care screening.
@@ -148,11 +148,11 @@ The interactive clinical decision-support application is built with **Streamlit*
    - 1-click **Quick-Load Clinical Presets** (*Healthy Active Adult*, *Borderline Risk*, *High-Risk Senior*).
 
 2. **Risk Stratification & SVG Gauge Visualizer**:
-   - Animated SVG circular gauge indicating continuous risk probability percentage ($0\% - 100\%$).
+   - Animated SVG circular gauge indicating continuous risk probability percentage (0% – 100%).
    - Tiered Risk Categorization:
-     - 🟢 **Low Risk** ($< 30\%$)
-     - 🟡 **Moderate / Borderline Risk** ($30\% - 60\%$)
-     - 🔴 **High Risk** ($> 60\%$)
+     - 🟢 **Low Risk** (< 30%)
+     - 🟡 **Moderate / Borderline Risk** (30% – 60%)
+     - 🔴 **High Risk** (> 60%)
 
 3. **Automated Clinical Recommendations & Report Export**:
    - Algorithmic triage guidelines tailored to detected abnormalities (hypertension protocol, lipid profiling, glycemic screening, smoking cessation).

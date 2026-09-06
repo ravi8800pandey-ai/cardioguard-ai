@@ -55,7 +55,7 @@ Cardiovascular diseases (CVDs) are the leading cause of death globally, taking a
 | Variable | Clinical Feature | Type | Unit / Format | Clinical Range / Categories |
 | :--- | :--- | :--- | :--- | :--- |
 | `id` | Patient Identification | Identifier | Integer | Dropped prior to modeling |
-| `age` | Patient Chronological Age | Objective | Days | Converted to decimal years ($39.0 - 64.9$ yrs) |
+| `age` | Patient Chronological Age | Objective | Days | Converted to decimal years (39.0 – 64.9 years) |
 | `gender` | Biological Sex | Objective | Categorical | 1: Female, 2: Male |
 | `height` | Stature | Examination | cm | Measured physical height |
 | `weight` | Body Mass | Examination | kg | Measured physical weight |
@@ -76,25 +76,25 @@ Cardiovascular diseases (CVDs) are the leading cause of death globally, taking a
 ### Essential Preprocessing Workflow
 
 ```mermaid
-graph TD
-    A[Raw Patient Cohort<br>70,000 Records] --> B[Clinical Sanity Filtering<br>Removed 1,269 Outliers]
-    B --> C[Feature Engineering<br>Age Years, BMI, Pulse Pressure]
-    C --> D[Stratified 80/20 Train-Test Split<br>Train: 54,984 | Test: 13,747]
-    D --> E[StandardScaler Normalization<br>Fit on Train, Transform Test]
+flowchart TD
+    A["Raw Patient Cohort<br>(70,000 Records)"] --> B["Clinical Sanity Filtering<br>(Removed 1,269 Outliers)"]
+    B --> C["Feature Engineering<br>(Age Years, BMI, Pulse Pressure)"]
+    C --> D["Stratified 80/20 Train-Test Split<br>(Train: 54,984 / Test: 13,747)"]
+    D --> E["StandardScaler Normalization<br>(Fit on Train, Transform Test)"]
 ```
 
 1. **Age Conversion:**
-   - Transformed raw `age` in days into clinically interpretable `age_years` ($\text{age} / 365.0$).
+   - Transformed raw `age` in days into clinically interpretable `age_years` (`age / 365.0`).
 2. **Body Mass Index (BMI) Derivation:**
-   - Computed standardized WHO metric: $\text{BMI} = \frac{\text{weight (kg)}}{(\text{height (m)})^2}$.
+   - Computed standardized WHO metric: `BMI = weight (kg) / (height (m))²`.
 3. **Hemodynamic Pulse Pressure Derivation:**
-   - Formulated $\text{Pulse Pressure} = \text{ap\_hi} - \text{ap\_lo}$, capturing arterial stiffness and vascular compliance.
+   - Formulated `Pulse Pressure = ap_hi − ap_lo`, capturing arterial stiffness and vascular compliance.
 4. **Physiological Bounding & Outlier Cleansing:**
    - Eliminated measurement artifacts, typographical inversions, and non-viable records:
-     - Systolic Blood Pressure: $60 \le \text{ap\_hi} \le 250\text{ mmHg}$
-     - Diastolic Blood Pressure: $40 \le \text{ap\_lo} \le 160\text{ mmHg}$
-     - Height: $100 \le \text{height} \le 250\text{ cm}$
-     - Weight: $30 \le \text{weight} \le 200\text{ kg}$
+     - **Systolic Blood Pressure:** `60 ≤ ap_hi ≤ 250 mmHg`
+     - **Diastolic Blood Pressure:** `40 ≤ ap_lo ≤ 160 mmHg`
+     - **Height:** `100 ≤ height ≤ 250 cm`
+     - **Weight:** `30 ≤ weight ≤ 200 kg`
    - **Retained Cohort:** **68,731 high-fidelity records** (98.19% data integrity retention).
 5. **Stratified Partitioning:**
    - Partitioned into **54,984 training instances** (80%) and **13,747 testing instances** (20%), preserving exact target class balance.
@@ -112,7 +112,7 @@ graph TD
 
 ### 2. Blood Pressure Distribution & AHA Staging
 ![Blood Pressure Distribution](images/03_blood_pressure_distribution.png)
-> **Analytical Finding:** *Patients presenting with Stage 2 Hypertension ($\ge 140/\ge 90\text{ mmHg}$) demonstrate an alarming **80.04% CVD prevalence**, representing a near four-fold risk escalation over normotensive individuals (**22.14%**).*
+> **Analytical Finding:** *Patients presenting with Stage 2 Hypertension (≥ 140 / ≥ 90 mmHg) demonstrate an alarming **80.04% CVD prevalence**, representing a near four-fold risk escalation over normotensive individuals (**22.14%**).*
 
 ---
 
@@ -124,7 +124,7 @@ graph TD
 
 ### 4. Body Mass Index (BMI) & Adiposity Shift
 ![BMI Distribution by Target Status](images/05_bmi_distribution.png)
-> **Analytical Finding:** *Patients diagnosed with CVD show a substantial upward shift in body mass index (mean **$28.48 \pm 5.58\text{ kg/m}^2$**) compared to healthy controls (mean **$26.49 \pm 4.92\text{ kg/m}^2$**), with obesity thresholds strongly separating the cohorts.*
+> **Analytical Finding:** *Patients diagnosed with CVD show a substantial upward shift in body mass index (mean **28.48 ± 5.58 kg/m²**) compared to healthy controls (mean **26.49 ± 4.92 kg/m²**), with obesity thresholds strongly separating the cohorts.*
 
 ---
 
@@ -140,7 +140,7 @@ graph TD
 | :---: | :--- | :--- | :---: | :---: |
 | 1 | `ap_hi` | Systolic Blood Pressure | **38.06%** | 38.06% |
 | 2 | `ap_lo` | Diastolic Blood Pressure | **19.26%** | 57.32% |
-| 3 | `pulse_pressure` | Pulse Pressure ($\Delta$ Pressure) | **14.17%** | **71.49%** |
+| 3 | `pulse_pressure` | Pulse Pressure (Δ Pressure) | **14.17%** | **71.49%** |
 | 4 | `age_years` | Chronological Age | **10.53%** | 82.02% |
 | 5 | `cholesterol` | Serum Cholesterol Level | **8.66%** | 90.68% |
 | 6 | `bmi` | Body Mass Index | **3.24%** | 93.92% |
@@ -160,15 +160,15 @@ graph TD
 <!-- ========================================== SLIDE 7 ========================================== -->
 ## Slide 7: Model Comparison & Benchmark Leaderboard
 
-### Comprehensive Performance Evaluation (Test Cohort: $N = 13,747$)
+### Comprehensive Performance Evaluation (Test Cohort: N = 13,747)
 
 | Classification Model | Accuracy | Precision | Recall (Sensitivity) | F1-Score | ROC-AUC | Clinical Status |
 | :--- | :---: | :---: | :---: | :---: | :---: | :--- |
 | **Random Forest (Ensemble)** | **74.09%** | **77.56%** | **67.03%** | **71.91%** | **0.8085** | 🏆 **Champion Model** |
-| **Decision Tree ($d=6$)** | 73.77% | 74.79% | **70.90%** | **72.79%** | 0.8009 | 🥈 Runner-Up (Highest Recall) |
+| **Decision Tree (d = 6)** | 73.77% | 74.79% | **70.90%** | **72.79%** | 0.8009 | 🥈 Runner-Up (Highest Recall) |
 | **Logistic Regression** | 73.37% | 75.97% | 67.56% | 71.52% | 0.7995 | Linear Baseline |
 | **Linear SVM (LinearSVC)** | 73.24% | 76.27% | 66.66% | 71.14% | 0.7993 | Maximum Margin Baseline |
-| **K-Nearest Neighbors ($k=11$)** | 72.41% | 73.10% | 70.00% | 71.52% | 0.7823 | Non-Parametric Baseline |
+| **K-Nearest Neighbors (k = 11)** | 72.41% | 73.10% | 70.00% | 71.52% | 0.7823 | Non-Parametric Baseline |
 
 ![Model Accuracy Comparison](images/10_model_accuracy_comparison.png)
 
@@ -181,7 +181,7 @@ graph TD
 <!-- ========================================== SLIDE 8 ========================================== -->
 ## Slide 8: Confusion Matrix & Clinical Screening Rationale
 
-### Champion Model Confusion Matrix ($N = 13,747$ Patients)
+### Champion Model Confusion Matrix (N = 13,747 Patients)
 ![Random Forest Confusion Matrix](images/12_rf_confusion_matrix.png)
 
 ### Detailed Matrix Decomposition
@@ -209,13 +209,13 @@ graph TD
 *All statements are derived directly from empirical dataset calculations:*
 
 1. **Hypertensive Risk Surge (4x Escalation):**
-   - Patients diagnosed with Stage 2 Hypertension ($\ge 140\text{ mmHg}$ systolic or $\ge 90\text{ mmHg}$ diastolic) exhibit an observed **80.04% cardiovascular disease prevalence**, compared to only **22.14%** among normotensive patients.
+   - Patients diagnosed with Stage 2 Hypertension (≥ 140 mmHg systolic or ≥ 90 mmHg diastolic) exhibit an observed **80.04% cardiovascular disease prevalence**, compared to only **22.14%** among normotensive patients.
 2. **Arterial Hemodynamics Dominate Predictability:**
    - Systolic pressure, diastolic pressure, and pulse pressure account for **71.49% of total feature importance**, proving that vascular arterial stress is the primary physiological driver of disease detection.
 3. **Steep Age Risk Gradient:**
    - CVD prevalence climbs progressively from **29.26% in individuals under 45 years** to **66.80% in patients aged 60–64**, highlighting age 50 as a critical clinical threshold for systematic screening.
 4. **Hypercholesterolemia as a Potent Risk Multiplier:**
-   - Serum cholesterol escalation increases CVD probability from **43.56% (Normal)** to **76.29% (Well Above Normal)**. When coupled with obesity ($\text{BMI} \ge 30\text{ kg/m}^2$), over **82%** of patients in this cohort presented with CVD.
+   - Serum cholesterol escalation increases CVD probability from **43.56% (Normal)** to **76.29% (Well Above Normal)**. When coupled with obesity (BMI ≥ 30 kg/m²), over **82%** of patients in this cohort presented with CVD.
 
 ---
 
