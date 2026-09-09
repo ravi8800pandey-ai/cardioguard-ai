@@ -4,6 +4,7 @@ echo =========================================================================
 echo    CardioGuard AI - 1-Click Push to GitHub
 echo =========================================================================
 echo.
+cd /d "%~dp0.."
 
 set "GIT_EXE=C:\Users\ravi8\AppData\Local\Programs\Git\cmd\git.exe"
 if not exist "%GIT_EXE%" (

@@ -225,8 +225,9 @@ cardioguard-ai/
 ├── train_model.py                # Standalone Scikit-Learn Training & Export Pipeline
 ├── sample_patients.csv           # Multi-Patient Batch Screening CSV Cohort
 ├── requirements.txt              # Application Dependencies
-├── run_app.bat                   # 1-Click Local Launcher for Windows
-├── push_to_github.bat            # 1-Click GitHub Synchronization Script
+├── scripts/
+│   ├── run_app.bat               # 1-Click Local Launcher for Windows
+│   └── push_to_github.bat        # 1-Click GitHub Synchronization Script
 ├── .streamlit/
 │   └── config.toml               # Custom Clinical UI Theme Tokens
 ├── models/

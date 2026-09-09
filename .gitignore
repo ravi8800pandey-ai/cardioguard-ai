@@ -7,3 +7,6 @@ env/
 *.log
 .DS_Store
 Thumbs.db
+
+# Large raw datasets (not needed at runtime by serialized model)
+cardio_train.csv

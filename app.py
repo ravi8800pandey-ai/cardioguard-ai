@@ -18,175 +18,287 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-CUSTOM_CSS = """
+DARK_THEME = {
+    "bg_app": "#0F172A",
+    "bg_sidebar": "#1E293B",
+    "hero_bg": "linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.9) 100%)",
+    "hero_border": "rgba(56, 189, 248, 0.25)",
+    "hero_shadow": "0 10px 30px -10px rgba(0, 0, 0, 0.5)",
+    "hero_title": "#F8FAFC",
+    "hero_subtitle": "#94A3B8",
+    "badge_model_bg": "rgba(2, 132, 199, 0.15)",
+    "badge_model_color": "#38BDF8",
+    "badge_model_border": "rgba(56, 189, 248, 0.35)",
+    "badge_info_bg": "rgba(56, 189, 248, 0.2)",
+    "badge_info_color": "#38BDF8",
+    "badge_info_border": "rgba(56, 189, 248, 0.4)",
+    "card_bg": "rgba(30, 41, 59, 0.7)",
+    "card_border": "rgba(148, 163, 184, 0.15)",
+    "card_hover_border": "rgba(56, 189, 248, 0.4)",
+    "metric_title": "#94A3B8",
+    "metric_val": "#F8FAFC",
+    "metric_desc": "#64748B",
+    "rec_bg": "rgba(30, 41, 59, 0.5)",
+    "rec_border": "rgba(148, 163, 184, 0.15)",
+    "rec_header": "#F8FAFC",
+    "rec_body": "#94A3B8",
+    "risk_title_low": "#34D399",
+    "risk_title_moderate": "#FBBF24",
+    "risk_title_high": "#F87171",
+    "gauge_track": "#334155",
+    "gauge_text": "#F8FAFC",
+    "gauge_subtext": "#94A3B8",
+    "gauge_desc": "#E2E8F0",
+    "chart_text": "#F8FAFC",
+    "chart_bar_bg": "#475569",
+    "text_primary": "#F8FAFC",
+    "text_secondary": "#94A3B8"
+}
+
+LIGHT_THEME = {
+    "bg_app": "#F8FAFC",
+    "bg_sidebar": "#F1F5F9",
+    "hero_bg": "linear-gradient(135deg, #FFFFFF 0%, #F1F5F9 100%)",
+    "hero_border": "rgba(2, 132, 199, 0.30)",
+    "hero_shadow": "0 10px 25px -10px rgba(0, 0, 0, 0.08)",
+    "hero_title": "#0F172A",
+    "hero_subtitle": "#475569",
+    "badge_model_bg": "rgba(2, 132, 199, 0.10)",
+    "badge_model_color": "#0284C7",
+    "badge_model_border": "rgba(2, 132, 199, 0.30)",
+    "badge_info_bg": "rgba(2, 132, 199, 0.12)",
+    "badge_info_color": "#0284C7",
+    "badge_info_border": "rgba(2, 132, 199, 0.35)",
+    "card_bg": "#FFFFFF",
+    "card_border": "rgba(203, 213, 225, 0.85)",
+    "card_hover_border": "rgba(2, 132, 199, 0.5)",
+    "metric_title": "#64748B",
+    "metric_val": "#0F172A",
+    "metric_desc": "#64748B",
+    "rec_bg": "#FFFFFF",
+    "rec_border": "rgba(203, 213, 225, 0.75)",
+    "rec_header": "#0F172A",
+    "rec_body": "#475569",
+    "risk_title_low": "#059669",
+    "risk_title_moderate": "#D97706",
+    "risk_title_high": "#DC2626",
+    "gauge_track": "#E2E8F0",
+    "gauge_text": "#0F172A",
+    "gauge_subtext": "#64748B",
+    "gauge_desc": "#334155",
+    "chart_text": "#0F172A",
+    "chart_bar_bg": "#CBD5E1",
+    "text_primary": "#0F172A",
+    "text_secondary": "#475569"
+}
+
+# Sidebar Appearance toggle
+theme_mode = st.sidebar.radio(
+    "🌗 Appearance",
+    ["Dark", "Light"],
+    index=0,
+    horizontal=True,
+    help="Toggle visual theme between Dark and Light mode."
+)
+theme = DARK_THEME if theme_mode == "Dark" else LIGHT_THEME
+
+def get_custom_css(t: dict) -> str:
+    return f"""
 <style>
 /* Global styles & Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
-html, body, [class*="css"] {
+html, body, [class*="css"] {{
     font-family: 'Inter', sans-serif;
-}
+}}
+
+.stApp, [data-testid="stAppViewContainer"] {{
+    background-color: {t['bg_app']} !important;
+    color: {t['text_primary']} !important;
+}}
+
+[data-testid="stSidebar"] {{
+    background-color: {t['bg_sidebar']} !important;
+}}
 
 /* App Header styling */
-.hero-card {
-    background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.9) 100%);
-    border: 1px solid rgba(56, 189, 248, 0.25);
+.hero-card {{
+    background: {t['hero_bg']};
+    border: 1px solid {t['hero_border']};
     border-radius: 16px;
     padding: 24px 30px;
     margin-bottom: 24px;
-    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
-}
+    box-shadow: {t['hero_shadow']};
+}}
 
-.hero-title {
+.hero-title {{
     font-size: 2.2rem;
     font-weight: 800;
-    color: #F8FAFC;
+    color: {t['hero_title']};
     margin-bottom: 8px;
     display: flex;
     align-items: center;
     gap: 12px;
-}
+}}
 
-.hero-subtitle {
+.hero-subtitle {{
     font-size: 1.05rem;
-    color: #94A3B8;
+    color: {t['hero_subtitle']};
     margin-bottom: 12px;
-}
+}}
 
-.badge-model {
+.badge-model {{
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    background: rgba(2, 132, 199, 0.15);
-    color: #38BDF8;
-    border: 1px solid rgba(56, 189, 248, 0.35);
+    background: {t['badge_model_bg']};
+    color: {t['badge_model_color']};
+    border: 1px solid {t['badge_model_border']};
     padding: 4px 12px;
     border-radius: 9999px;
     font-size: 0.85rem;
     font-weight: 600;
-}
+}}
 
 /* Metric cards */
-.metric-card {
-    background: rgba(30, 41, 59, 0.7);
+.metric-card {{
+    background: {t['card_bg']};
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(148, 163, 184, 0.15);
+    border: 1px solid {t['card_border']};
     border-radius: 12px;
     padding: 16px 20px;
     text-align: center;
     transition: transform 0.2s ease, border-color 0.2s ease;
-}
+}}
 
-.metric-card:hover {
+.metric-card:hover {{
     transform: translateY(-2px);
-    border-color: rgba(56, 189, 248, 0.4);
-}
+    border-color: {t['card_hover_border']};
+}}
 
-.metric-title {
+.metric-title {{
     font-size: 0.82rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    color: #94A3B8;
+    color: {t['metric_title']};
     margin-bottom: 6px;
     font-weight: 600;
-}
+}}
 
-.metric-val {
+.metric-val {{
     font-size: 1.6rem;
     font-weight: 700;
-    color: #F8FAFC;
-}
+    color: {t['metric_val']};
+}}
 
-.metric-desc {
+.metric-desc {{
     font-size: 0.8rem;
-    color: #64748B;
+    color: {t['metric_desc']};
     margin-top: 4px;
-}
+}}
 
 /* Risk Level Banners */
-.risk-banner-low {
+.risk-banner-low {{
     background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(5, 150, 105, 0.05));
     border: 1px solid rgba(16, 185, 129, 0.4);
     border-radius: 14px;
     padding: 24px;
     text-align: center;
-}
+}}
 
-.risk-banner-moderate {
+.risk-banner-moderate {{
     background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(217, 119, 6, 0.05));
     border: 1px solid rgba(245, 158, 11, 0.4);
     border-radius: 14px;
     padding: 24px;
     text-align: center;
-}
+}}
 
-.risk-banner-high {
+.risk-banner-high {{
     background: linear-gradient(135deg, rgba(239, 68, 68, 0.15), rgba(220, 38, 38, 0.05));
     border: 1px solid rgba(239, 68, 68, 0.4);
     border-radius: 14px;
     padding: 24px;
     text-align: center;
-}
+}}
 
-.risk-title-low { color: #34D399; font-size: 1.8rem; font-weight: 800; }
-.risk-title-moderate { color: #FBBF24; font-size: 1.8rem; font-weight: 800; }
-.risk-title-high { color: #F87171; font-size: 1.8rem; font-weight: 800; }
+.risk-title-low {{ color: {t['risk_title_low']}; font-size: 1.8rem; font-weight: 800; }}
+.risk-title-moderate {{ color: {t['risk_title_moderate']}; font-size: 1.8rem; font-weight: 800; }}
+.risk-title-high {{ color: {t['risk_title_high']}; font-size: 1.8rem; font-weight: 800; }}
 
-.risk-pct {
+.risk-pct {{
     font-size: 3.2rem;
     font-weight: 800;
     margin: 8px 0;
     letter-spacing: -0.03em;
-}
+}}
 
 /* Category Badges */
-.badge-pill {
+.badge-pill {{
     padding: 3px 10px;
     border-radius: 9999px;
     font-size: 0.78rem;
     font-weight: 600;
     display: inline-block;
-}
-.badge-success { background: rgba(16, 185, 129, 0.2); color: #34D399; border: 1px solid rgba(16, 185, 129, 0.4); }
-.badge-warning { background: rgba(245, 158, 11, 0.2); color: #FBBF24; border: 1px solid rgba(245, 158, 11, 0.4); }
-.badge-danger { background: rgba(239, 68, 68, 0.2); color: #F87171; border: 1px solid rgba(239, 68, 68, 0.4); }
-.badge-info { background: rgba(56, 189, 248, 0.2); color: #38BDF8; border: 1px solid rgba(56, 189, 248, 0.4); }
+}}
+.badge-success {{ background: rgba(16, 185, 129, 0.2); color: #34D399; border: 1px solid rgba(16, 185, 129, 0.4); }}
+.badge-warning {{ background: rgba(245, 158, 11, 0.2); color: #FBBF24; border: 1px solid rgba(245, 158, 11, 0.4); }}
+.badge-danger {{ background: rgba(239, 68, 68, 0.2); color: #F87171; border: 1px solid rgba(239, 68, 68, 0.4); }}
+.badge-info {{ background: {t['badge_info_bg']}; color: {t['badge_info_color']}; border: 1px solid {t['badge_info_border']}; }}
 
 /* Recommendation Cards */
-.rec-card {
-    background: rgba(30, 41, 59, 0.5);
+.rec-card {{
+    background: {t['rec_bg']};
     border-left: 4px solid #0284C7;
     border-radius: 8px;
     padding: 14px 18px;
     margin-bottom: 12px;
-}
-.rec-card.rec-alert {
+    border-top: 1px solid {t['rec_border']};
+    border-right: 1px solid {t['rec_border']};
+    border-bottom: 1px solid {t['rec_border']};
+}}
+.rec-card.rec-alert {{
     border-left-color: #EF4444;
-    background: rgba(239, 68, 68, 0.06);
-}
-.rec-card.rec-warning {
+    background: rgba(239, 68, 68, 0.08);
+}}
+.rec-card.rec-warning {{
     border-left-color: #F59E0B;
-    background: rgba(245, 158, 11, 0.06);
-}
-.rec-card.rec-healthy {
+    background: rgba(245, 158, 11, 0.08);
+}}
+.rec-card.rec-healthy {{
     border-left-color: #10B981;
-    background: rgba(16, 185, 129, 0.06);
-}
+    background: rgba(16, 185, 129, 0.08);
+}}
 
-.rec-header {
+.rec-header {{
     font-weight: 700;
     font-size: 0.95rem;
-    color: #F8FAFC;
+    color: {t['rec_header']};
     margin-bottom: 4px;
-}
-.rec-body {
+}}
+.rec-body {{
     font-size: 0.88rem;
-    color: #94A3B8;
+    color: {t['rec_body']};
     line-height: 1.45;
-}
+}}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {{
+    .hero-title {{
+        font-size: 1.6rem !important;
+    }}
+    .hero-card {{
+        padding: 16px 18px !important;
+    }}
+    .metric-val {{
+        font-size: 1.3rem !important;
+    }}
+}}
 </style>
 """
-st.markdown(CUSTOM_CSS, unsafe_allow_html=True)
+
+st.markdown(get_custom_css(theme), unsafe_allow_html=True)
+
 
 # -----------------------------------------------------------------------------
 # 2. Model & Pipeline Loader (with Auto-Trainer Fallback)
@@ -201,12 +313,14 @@ def load_trained_model():
     """Load serialized Random Forest pipeline or train if missing."""
     if not os.path.exists(MODEL_PATH):
         st.warning("Pre-trained model artifact not found. Initializing auto-training pipeline...")
-        from train_model import train_and_export
+        try:
+            from cardio_prediction_app.train_model import train_and_export
+        except ImportError:
+            from train_model import train_and_export  # type: ignore
         # Resolve dataset path
         candidates = [
             DATASET_PATH,
-            os.path.join(CURRENT_DIR, "cardio_train.csv"),
-            r"d:\RAVI DOC\projects\cardio_train.csv"
+            os.path.join(CURRENT_DIR, "cardio_train.csv")
         ]
         resolved = None
         for c in candidates:
@@ -226,6 +340,52 @@ def load_trained_model():
     return pipeline, metrics
 
 pipeline, model_metrics = load_trained_model()
+
+# Exact test-set metrics evaluated across 13,747 patients for thresholds 0.20 to 0.60 (step 0.01)
+# Format: {threshold: (accuracy_pct, precision, recall, specificity, tp, fp, tn, fn)}
+THRESHOLD_METRICS = {
+    0.20: (56.67, 0.5337, 0.9850, 0.1568, 6701, 5855, 1089, 102),
+    0.21: (57.99, 0.5419, 0.9777, 0.1902, 6651, 5623, 1321, 152),
+    0.22: (59.31, 0.5503, 0.9721, 0.2219, 6613, 5403, 1541, 190),
+    0.23: (60.36, 0.5574, 0.9660, 0.2486, 6572, 5218, 1726, 231),
+    0.24: (61.66, 0.5664, 0.9606, 0.2795, 6535, 5003, 1941, 268),
+    0.25: (63.13, 0.5778, 0.9469, 0.3220, 6442, 4708, 2236, 361),
+    0.26: (65.52, 0.5984, 0.9224, 0.3934, 6275, 4212, 2732, 528),
+    0.27: (66.56, 0.6086, 0.9084, 0.4277, 6180, 3974, 2970, 623),
+    0.28: (67.34, 0.6172, 0.8950, 0.4562, 6089, 3776, 3168, 714),
+    0.29: (67.97, 0.6244, 0.8852, 0.4784, 6022, 3622, 3322, 781),
+    0.30: (68.41, 0.6302, 0.8756, 0.4965, 5957, 3496, 3448, 846),
+    0.31: (69.11, 0.6381, 0.8681, 0.5176, 5906, 3350, 3594, 897),
+    0.32: (69.48, 0.6430, 0.8614, 0.5315, 5860, 3253, 3691, 943),
+    0.33: (70.03, 0.6499, 0.8551, 0.5487, 5817, 3134, 3810, 986),
+    0.34: (70.43, 0.6555, 0.8484, 0.5631, 5772, 3034, 3910, 1031),
+    0.35: (70.83, 0.6613, 0.8415, 0.5778, 5725, 2932, 4012, 1078),
+    0.36: (71.23, 0.6671, 0.8358, 0.5913, 5686, 2838, 4106, 1117),
+    0.37: (71.39, 0.6712, 0.8271, 0.6030, 5627, 2757, 4187, 1176),
+    0.38: (71.78, 0.6787, 0.8161, 0.6215, 5552, 2628, 4316, 1251),
+    0.39: (72.52, 0.6933, 0.7976, 0.6544, 5426, 2400, 4544, 1377),
+    0.40: (73.40, 0.7118, 0.7772, 0.6917, 5287, 2141, 4803, 1516),
+    0.41: (73.65, 0.7186, 0.7685, 0.7052, 5228, 2047, 4897, 1575),
+    0.42: (73.85, 0.7252, 0.7592, 0.7182, 5165, 1957, 4987, 1638),
+    0.43: (73.97, 0.7315, 0.7486, 0.7308, 5093, 1869, 5075, 1710),
+    0.44: (74.12, 0.7396, 0.7361, 0.7461, 5008, 1763, 5181, 1795),
+    0.45: (74.15, 0.7468, 0.7226, 0.7599, 4916, 1667, 5277, 1887),
+    0.46: (74.05, 0.7520, 0.7097, 0.7707, 4828, 1592, 5352, 1975),
+    0.47: (74.18, 0.7604, 0.6984, 0.7844, 4751, 1497, 5447, 2052),
+    0.48: (74.22, 0.7663, 0.6893, 0.7941, 4689, 1430, 5514, 2114),
+    0.49: (74.22, 0.7716, 0.6804, 0.8027, 4629, 1370, 5574, 2174),
+    0.50: (74.09, 0.7756, 0.6703, 0.8101, 4560, 1319, 5625, 2243),
+    0.51: (74.02, 0.7805, 0.6607, 0.8180, 4495, 1264, 5680, 2308),
+    0.52: (73.99, 0.7863, 0.6516, 0.8265, 4433, 1205, 5739, 2370),
+    0.53: (73.94, 0.7913, 0.6428, 0.8340, 4373, 1153, 5791, 2430),
+    0.54: (73.94, 0.7969, 0.6352, 0.8414, 4321, 1101, 5843, 2482),
+    0.55: (73.74, 0.7993, 0.6268, 0.8458, 4264, 1071, 5873, 2539),
+    0.56: (73.68, 0.8029, 0.6205, 0.8508, 4221, 1036, 5908, 2582),
+    0.57: (73.65, 0.8070, 0.6146, 0.8560, 4181, 1000, 5944, 2622),
+    0.58: (73.54, 0.8118, 0.6056, 0.8625, 4120, 955, 5989, 2683),
+    0.59: (73.22, 0.8156, 0.5928, 0.8687, 4033, 912, 6032, 2770),
+    0.60: (73.06, 0.8185, 0.5855, 0.8728, 3983, 883, 6061, 2820),
+}
 
 # -----------------------------------------------------------------------------
 # 3. Clinical Helper Functions & Classifications
@@ -290,17 +450,17 @@ preset_choice = st.sidebar.selectbox("⚡ Quick Demo Presets", list(PRESETS.keys
 preset_data = PRESETS[preset_choice]
 
 # Demographic values
-default_age = preset_data["age"] if preset_data else 50
-default_gender = preset_data["gender"] if preset_data else "Male"
-default_height = preset_data["height"] if preset_data else 170
-default_weight = preset_data["weight"] if preset_data else 75.0
-default_ap_hi = preset_data["ap_hi"] if preset_data else 130
-default_ap_lo = preset_data["ap_lo"] if preset_data else 85
-default_chol = preset_data["chol"] if preset_data else "Normal"
-default_gluc = preset_data["gluc"] if preset_data else "Normal"
-default_smoke = preset_data["smoke"] if preset_data else "No"
-default_alco = preset_data["alco"] if preset_data else "No"
-default_active = preset_data["active"] if preset_data else "Yes"
+default_age = int(preset_data["age"]) if preset_data else 50
+default_gender = str(preset_data["gender"]) if preset_data else "Male"
+default_height = int(preset_data["height"]) if preset_data else 170
+default_weight = float(preset_data["weight"]) if preset_data else 75.0
+default_ap_hi = int(preset_data["ap_hi"]) if preset_data else 130
+default_ap_lo = int(preset_data["ap_lo"]) if preset_data else 85
+default_chol = str(preset_data["chol"]) if preset_data else "Normal"
+default_gluc = str(preset_data["gluc"]) if preset_data else "Normal"
+default_smoke = str(preset_data["smoke"]) if preset_data else "No"
+default_alco = str(preset_data["alco"]) if preset_data else "No"
+default_active = str(preset_data["active"]) if preset_data else "Yes"
 
 with st.sidebar.expander("👤 1. Demographics", expanded=True):
     age_input = st.slider("Patient Age (Years)", min_value=18, max_value=100, value=default_age, step=1)
@@ -323,7 +483,7 @@ with st.sidebar.expander("⚖️ 3. Body Dimensions", expanded=True):
     with col_h:
         height_cm = st.number_input("Height (cm)", min_value=110, max_value=230, value=default_height, step=1)
     with col_w:
-        weight_kg = st.number_input("Weight (kg)", min_value=35.0, max_value=200.0, value=float(default_weight), step=0.5)
+        weight_kg = st.number_input("Weight (kg)", min_value=35.0, max_value=200.0, value=default_weight, step=0.5)
 
     calculated_bmi = round(weight_kg / ((height_cm / 100.0) ** 2), 2)
     bmi_status, bmi_badge_class = classify_bmi(calculated_bmi)
@@ -342,6 +502,22 @@ with st.sidebar.expander("🏃 5. Lifestyle & Habits", expanded=True):
         alco_input = st.radio("Alcohol Intake", ["No", "Yes"], index=0 if default_alco == "No" else 1, horizontal=True)
     with col_l2:
         active_input = st.radio("Physical Activity", ["Active", "Sedentary"], index=0 if default_active == "Yes" else 1)
+
+with st.sidebar.expander("⚙️ 6. Model Sensitivity", expanded=True):
+    decision_threshold = st.slider(
+        "Decision Threshold",
+        min_value=0.20,
+        max_value=0.60,
+        value=0.50,
+        step=0.01,
+        help="Lower threshold = more sensitive (fewer missed CVD cases, more false alarms). Higher threshold = more specific (fewer false alarms, more missed cases)."
+    )
+    if decision_threshold < 0.50:
+        st.caption(f"🚨 **High-Sensitivity Mode ({decision_threshold:.2f})**: Lower threshold catches early/borderline CVD cases to minimize dangerous false negatives.")
+    elif decision_threshold > 0.50:
+        st.caption(f"🎯 **High-Specificity Mode ({decision_threshold:.2f})**: Demands higher certainty before flagging cases to prevent unnecessary clinical workups.")
+    else:
+        st.caption("Standard Balanced Threshold (0.50).")
 
 # Format payload for Model Pipeline
 gender_code = 1 if gender_input == "Female" else 2
@@ -369,7 +545,7 @@ input_df = pd.DataFrame([{
 
 # Pipeline Inference
 prediction_proba = float(pipeline.predict_proba(input_df)[0][1])
-prediction_class = int(pipeline.predict(input_df)[0])
+prediction_class = int(prediction_proba >= decision_threshold)
 risk_percentage = round(prediction_proba * 100, 1)
 
 # -----------------------------------------------------------------------------
@@ -440,23 +616,24 @@ with tab_assessment:
             <div class="{tier_title_class}">{tier_label}</div>
             <div style="display: flex; justify-content: center; margin: 15px 0;">
                 <svg width="200" height="200" viewBox="0 0 200 200">
-                    <circle cx="100" cy="100" r="75" stroke="#334155" stroke-width="16" fill="transparent" />
+                    <circle cx="100" cy="100" r="75" stroke="{theme['gauge_track']}" stroke-width="16" fill="transparent" />
                     <circle cx="100" cy="100" r="75" stroke="{needle_color}" stroke-width="16" fill="transparent"
                             stroke-dasharray="{circumference}" stroke-dashoffset="{dashoffset}"
                             stroke-linecap="round" transform="rotate(-90 100 100)" style="transition: stroke-dashoffset 1s ease;" />
-                    <text x="100" y="95" text-anchor="middle" fill="#F8FAFC" font-size="34" font-weight="800" font-family="Inter, sans-serif">{risk_percentage}%</text>
-                    <text x="100" y="125" text-anchor="middle" fill="#94A3B8" font-size="14" font-weight="600" font-family="Inter, sans-serif">CVD PROBABILITY</text>
+                    <text x="100" y="95" text-anchor="middle" fill="{theme['gauge_text']}" font-size="34" font-weight="800" font-family="Inter, sans-serif">{risk_percentage}%</text>
+                    <text x="100" y="125" text-anchor="middle" fill="{theme['gauge_subtext']}" font-size="14" font-weight="600" font-family="Inter, sans-serif">CVD PROBABILITY</text>
                 </svg>
             </div>
-            <div style="font-size: 0.95rem; color: #E2E8F0; line-height: 1.5;">{tier_desc}</div>
+            <div style="font-size: 0.95rem; color: {theme['gauge_desc']}; line-height: 1.5;">{tier_desc}</div>
             <div style="margin-top: 14px;">
                 <span class="badge-pill {'badge-danger' if prediction_class==1 else 'badge-success'}">
-                    Model Binary Decision: {'Cardiovascular Disease Likely (1)' if prediction_class==1 else 'No Disease Indicated (0)'}
+                    Model Binary Decision: {'Cardiovascular Disease Likely (1)' if prediction_class==1 else 'No Disease Indicated (0)'} (Threshold: {decision_threshold:.2f})
                 </span>
             </div>
         </div>
         """
         st.markdown(svg_gauge, unsafe_allow_html=True)
+        st.caption("⚠️ Educational tool only — not a medical diagnosis. Consult a physician.")
 
         st.markdown("<br>", unsafe_allow_html=True)
         # Quick Clinical Metrics Tiles
@@ -644,18 +821,77 @@ with tab_explain:
     st.markdown("### 🏆 Model Architecture & Benchmark Comparisons")
     st.markdown("Detailed breakdown of model selection, evaluation metrics, and feature importance analysis based on the training on 70,000 patient records.")
 
-    # High-level metrics row
+    # High-level baseline metrics row (at default 0.50 threshold)
     bcol1, bcol2, bcol3, bcol4, bcol5 = st.columns(5)
     with bcol1:
         st.metric("Model Architecture", "Random Forest", "Best Performing")
     with bcol2:
-        st.metric("Test Accuracy", f"{model_metrics.get('accuracy', 74.09)}%", "+0.32% vs DT")
+        st.metric("Test Accuracy (0.50)", f"{model_metrics.get('accuracy', 74.09)}%", "+0.32% vs DT")
     with bcol3:
         st.metric("ROC-AUC Score", f"{model_metrics.get('roc_auc', 0.8085)}", "Excellent AUC")
     with bcol4:
-        st.metric("Precision", f"{round(model_metrics.get('precision', 0.7756)*100, 2)}%", "CVD Class")
+        st.metric("Precision (0.50)", f"{round(model_metrics.get('precision', 0.7756)*100, 2)}%", "CVD Class")
     with bcol5:
-        st.metric("Recall", f"{round(model_metrics.get('recall', 0.6703)*100, 2)}%", "CVD Class")
+        st.metric("Recall (0.50)", f"{round(model_metrics.get('recall', 0.6703)*100, 2)}%", "CVD Class")
+
+    # Live-updating threshold calibration stat block
+    th_round = round(decision_threshold, 2)
+    cal_acc, cal_prec, cal_rec, cal_spec, cal_tp, cal_fp, cal_tn, cal_fn = THRESHOLD_METRICS.get(
+        th_round, (74.09, 0.7756, 0.6703, 0.8101, 4560, 1319, 5625, 2243)
+    )
+
+    rec_delta = (cal_rec - 0.6703) * 100
+    prec_delta = (cal_prec - 0.7756) * 100
+    acc_delta = cal_acc - 74.09
+    fn_delta = cal_fn - 2243
+
+    st.markdown("<br>", unsafe_allow_html=True)
+    st.markdown(f"#### ⚙️ Live Threshold Sensitivity Calibration (`{decision_threshold:.2f}` vs Baseline `0.50`)")
+    st.caption("Real-time impact on the 13,747 test patients as you adjust the '⚙️ 6. Model Sensitivity' slider.")
+
+    lcol1, lcol2, lcol3, lcol4, lcol5 = st.columns(5)
+    with lcol1:
+        st.metric(
+            label="Calibrated Sensitivity",
+            value=f"{cal_rec * 100:.1f}%",
+            delta=f"{rec_delta:+.1f}% vs 0.50" if abs(rec_delta) >= 0.05 else "Baseline",
+            help="Recall (Sensitivity): Proportion of actual CVD patients correctly detected."
+        )
+    with lcol2:
+        st.metric(
+            label="Calibrated Precision",
+            value=f"{cal_prec * 100:.1f}%",
+            delta=f"{prec_delta:+.1f}% vs 0.50" if abs(prec_delta) >= 0.05 else "Baseline",
+            help="Precision: Proportion of flagged patients who truly have cardiovascular disease."
+        )
+    with lcol3:
+        st.metric(
+            label="Specificity",
+            value=f"{cal_spec * 100:.1f}%",
+            delta=f"{(cal_spec - 0.8101)*100:+.1f}% vs 0.50" if abs(cal_spec - 0.8101) >= 0.0005 else "Baseline",
+            help="Proportion of healthy patients correctly identified."
+        )
+    with lcol4:
+        st.metric(
+            label="Test Accuracy",
+            value=f"{cal_acc:.2f}%",
+            delta=f"{acc_delta:+.2f}% vs 0.50" if abs(acc_delta) >= 0.01 else "Baseline"
+        )
+    with lcol5:
+        st.metric(
+            label="Missed Cases (FN)",
+            value=f"{cal_fn:,}",
+            delta=f"{fn_delta:+d} cases" if fn_delta != 0 else "Baseline",
+            delta_color="inverse",
+            help="Clinical False Negatives: CVD patients who were missed at this threshold."
+        )
+
+    if decision_threshold <= 0.38:
+        st.success(f"🎯 **High-Sensitivity Screening Active (Threshold {decision_threshold:.2f})**: Sensitivity rises to **{cal_rec*100:.1f}%** ({cal_tp:,} detected cases). Missed cases drop from 2,243 to **{cal_fn:,}** ({2243 - cal_fn:,} fewer missed CVD patients!), fulfilling the clinical triage recommendations in the project case study.")
+    elif decision_threshold > 0.50:
+        st.warning(f"🛡️ **High-Specificity Protocol Active (Threshold {decision_threshold:.2f})**: Precision increases to **{cal_prec*100:.1f}%** with fewer false alarms ({cal_fp:,} FP), but missed CVD cases (FN) rise to **{cal_fn:,}**.")
+    else:
+        st.info("⚖️ **Standard Decision Threshold (0.50)**: Standard balanced trade-off between diagnostic sensitivity (67.03%) and precision (77.56%).")
 
     st.markdown("<br>", unsafe_allow_html=True)
     c1, c2 = st.columns([1.2, 1], gap="large")
@@ -678,7 +914,7 @@ with tab_explain:
             color=alt.condition(
                 alt.datum.model == 'Random Forest',
                 alt.value('#0284C7'),
-                alt.value('#475569')
+                alt.value(theme['chart_bar_bg'])
             ),
             tooltip=['model', 'accuracy', 'status']
         ).properties(height=260)
@@ -687,7 +923,7 @@ with tab_explain:
             align='left',
             baseline='middle',
             dx=6,
-            color='#F8FAFC',
+            color=theme['chart_text'],
             fontWeight=700
         ).encode(
             text=alt.Text('accuracy:Q', format='.2f')
@@ -698,23 +934,20 @@ with tab_explain:
         st.info("💡 **Clinical Observation**: The ensemble mechanism of Random Forest successfully reduces variance across individual noisy biometric measurements (e.g. episodic blood pressure spikes), yielding the highest generalizability.")
 
     with c2:
-        st.markdown("#### 🎯 Confusion Matrix (13,747 Test Patients)")
-        cm = model_metrics.get("confusion_matrix", [[5508, 1436], [2121, 4682]])
+        st.markdown(f"#### 🎯 Live Confusion Matrix (Threshold {decision_threshold:.2f})")
         cm_df = pd.DataFrame(
-            cm,
+            [[cal_tn, cal_fp], [cal_fn, cal_tp]],
             columns=["Predicted No CVD", "Predicted CVD"],
             index=["Actual No CVD", "Actual CVD"]
         )
 
         st.dataframe(cm_df, use_container_width=True)
 
-        tn, fp = cm[0][0], cm[0][1]
-        fn, tp = cm[1][0], cm[1][1]
         st.markdown(f"""
-        - **True Negatives (TN)**: **{tn:,}** (Healthy correctly identified)
-        - **True Positives (TP)**: **{tp:,}** (CVD correctly detected)
-        - **False Positives (FP)**: **{fp:,}** (Screening false alarms)
-        - **False Negatives (FN)**: **{fn:,}** (Missed cases)
+        - **True Negatives (TN)**: **{cal_tn:,}** (Healthy correctly identified)
+        - **True Positives (TP)**: **{cal_tp:,}** (CVD correctly detected)
+        - **False Positives (FP)**: **{cal_fp:,}** (Screening false alarms)
+        - **False Negatives (FN)**: **{cal_fn:,}** (Missed cases — clinical hazard)
         """)
 
     st.markdown("<br>", unsafe_allow_html=True)
@@ -819,7 +1052,7 @@ with tab_batch:
             else:
                 X_batch = processed_df[feature_cols]
                 probs = pipeline.predict_proba(X_batch)[:, 1]
-                preds = pipeline.predict(X_batch)
+                preds = (probs >= decision_threshold).astype(int)
 
                 processed_df['CVD_Probability_%'] = (probs * 100).round(1)
                 processed_df['Predicted_CVD'] = preds
