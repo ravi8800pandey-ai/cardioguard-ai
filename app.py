@@ -314,9 +314,10 @@ def load_trained_model():
     if not os.path.exists(MODEL_PATH):
         st.warning("Pre-trained model artifact not found. Initializing auto-training pipeline...")
         try:
-            from cardio_prediction_app.train_model import train_and_export
-        except ImportError:
-            from train_model import train_and_export  # type: ignore
+            from train_model import train_and_export
+        except ImportError as e:
+            st.error(f"Could not import train_model.py: {e}")
+            raise
         # Resolve dataset path
         candidates = [
             DATASET_PATH,
